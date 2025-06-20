@@ -1,0 +1,9 @@
+services:
+  parquet-converter:
+    build: .
+    entrypoint: bash -c "tail -f /dev/null"
+    volumes:
+      - "../torch/output:/torch/output"
+      - "./output:/output"
+      - "./src:/src"
+
