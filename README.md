@@ -15,4 +15,5 @@ bash execute-crtdl.sh -f queries/example-crtdl.json
 5. See your extraction being passed to the output folder output/<your-job-id>
 6. Start up the parquet converter `docker compose -p dse-example up -d` in the `parquet-converter` folder
 7. Ssh into the container `docker exec -it dse-example-parquet-converter-1 bash`
-8. execute the conversion to parquet from torch `cd /src` and `python3 test-parquet-conversion.py`
+8. In the `test-parquet-conversion.py` change the `torch_extraction_id` in line `69` to your extraction id.
+9. Execute the conversion to parquet from torch `cd /src` and `python3 test-parquet-conversion.py`
