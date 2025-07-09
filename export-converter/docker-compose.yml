@@ -1,5 +1,5 @@
 services:
-  parquet-converter:
+  export-converter:
     build: .
     entrypoint: bash -c "tail -f /dev/null"
     volumes:
