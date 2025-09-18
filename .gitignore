@@ -2,3 +2,4 @@ output
 torch/queries/*
 !torch/queries/example-crtdl.json
 parquet-converter/src/torch/bundles/*
+dimp/extraction-transfer

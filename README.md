@@ -1,7 +1,7 @@
 # dse-example
 
 
-## Run
+## Run Extraction
 
 1. Start the fhir server and torch in the respective folders using `docker compose -p dse-example up -d`
 2. Upload testdata to your fhir server `bash upload-testdata.sh`
@@ -17,3 +17,29 @@ bash execute-crtdl.sh -f queries/example-crtdl.json
 7. Ssh into the container `docker exec -it dse-example-export-converter-1 bash`
 8. In the `test-export-conversion.py` change the `torch_extraction_id` in line `69` to your extraction id.
 9. Execute the conversion to export from torch `cd /src` and `python3 test-parquet-conversion.py` and `python3 test-csv-conversion.py`
+
+
+## Run DIMP (De-Identification, Minimization, Pseudonymization)
+
+1. Start the pseudonymization service (vfps) `docker compose -p dse-example up -d` and the DIMP service (fhir-pseudonymizer) `docker compose -p dse-example up -d` in the respectice folders
+2. Create a `patient-identifiers` namespace in vfps:
+
+```curl
+curl --request POST \
+  --url http://localhost:8080/v1/namespaces \
+  --header 'content-type: application/json' \
+  --data '{
+  "name": "patient-identifiers",
+  "pseudonymGenerationMethod": "PSEUDONYM_GENERATION_METHOD_UNSPECIFIED",
+  "pseudonymLength": 32,
+  "pseudonymPrefix": "string",
+  "pseudonymSuffix": "string",
+  "description": "string"
+}'
+```
+
+3. execute the dimp bash script under `dimp/dimp.sh -e {your-export-id-here}`
+4. 
+
+
+
