@@ -46,6 +46,10 @@
                     {
                         "attributeRef": "Patient.identifier",
                         "mustHave": false
+                    },
+                    {
+                        "attributeRef": "Patient.birthDate",
+                        "mustHave": false
                     }
                 ]
             },

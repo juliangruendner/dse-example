@@ -6,7 +6,7 @@ TORCH_BASE_URL="${TORCH_BASE_URL:-http://localhost:8086}"
 TARGET_SERVER="${TARGET_SERVER:-http://localhost:8082/fhir}"
 PSEUDONYMIZER_URL="${PSEUDONYMIZER_URL:-http://localhost:8083/fhir}"
 EXPORT_ID=""
-TRANSFER_FOLDER="extraction-transfer"
+
 
 while getopts "e:" opt; do
   case $opt in
@@ -20,6 +20,9 @@ if [[ -z "$EXPORT_ID" ]]; then
   exit 1
 fi
 
+TRANSFER_FOLDER="extraction-transfer/$EXPORT_ID"
+# Create transfer folder if not exists
+mkdir -p "$TRANSFER_FOLDER"
 
 dimp_file(){
   local url="$1"
@@ -79,6 +82,7 @@ if [[ ${#urls[@]} -eq 0 ]]; then
   echo "⚠️  No NDJSON URLs found in export metadata." >&2
   exit 1
 fi
+
 
 #Then process all remaining files
 for url in "${urls[@]}"; do
